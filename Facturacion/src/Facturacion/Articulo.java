@@ -1,5 +1,7 @@
 package Facturacion;
 
+import java.util.LinkedList;
+
 public class Articulo {
 
     String codigo, nombreArticulo;
@@ -9,7 +11,7 @@ public class Articulo {
     public Articulo() {
     }
 
-    public Articulo(String codigo, String nombreArticulo, int cantidad, float precio) {
+    public Articulo(String codigo, String nombreArticulo, float precio, int cantidad) {
         this.codigo = codigo;
         this.nombreArticulo = nombreArticulo;
         this.cantidad = cantidad;
@@ -21,4 +23,8 @@ public class Articulo {
         this.cantidad = cantidad;
     }
 
+    public void insertarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
+            String codigoArticulo, float precioArticulo, int cantidadArticulo) {
+        inventario.add(new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo));
+    }
 }
