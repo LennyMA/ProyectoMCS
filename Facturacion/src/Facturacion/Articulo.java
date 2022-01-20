@@ -27,4 +27,13 @@ public class Articulo {
             String codigoArticulo, float precioArticulo, int cantidadArticulo) {
         inventario.add(new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo));
     }
+
+    public int buscarArticulo(LinkedList<Articulo> inventario, String codigoArticulo) {
+        for (int i = 0; i < inventario.size(); i++) {
+            if (inventario.get(i).codigo.equals(codigoArticulo)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
