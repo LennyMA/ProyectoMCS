@@ -36,4 +36,14 @@ public class Articulo {
         }
         return -1;
     }
+
+    public String getNombreArticulo() {
+        if (nombreArticulo.length() > 9) {
+            return nombreArticulo.substring(0, 9);
+        }
+        if (nombreArticulo.length() < 5) {
+            return nombreArticulo + "  ";
+        }
+        return nombreArticulo;
+    }
 }
