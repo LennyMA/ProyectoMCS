@@ -46,4 +46,10 @@ public class Articulo {
         }
         return nombreArticulo;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombreArticulo() + "\t" + this.codigo + "\t" + this.cantidad + "\t" + ("$ " + this.precio) + "\t\t"
+                + ("$ " + (this.precio * this.cantidad));
+    }
 }
