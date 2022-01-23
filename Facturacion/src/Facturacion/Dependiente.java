@@ -62,4 +62,20 @@ public class Dependiente {
         }
         return tipo;
     }
+    
+      public boolean buscarClaveDependiente(LinkedList<Dependiente> dependiente, String codigoUsuario, String claveUsuario) {
+        int posicion = buscarDependiente(dependiente, codigoUsuario);
+
+        if (posicion != -1) {
+            if (dependiente.get(posicion).clave.equals(claveUsuario)) {
+                return true;
+            } else {
+                System.out.println("\nError: Contraseña incorrecta");
+                return false;
+            }
+        } else {
+            System.out.println("\nError: El usuario no existe");
+            return false;
+        }
+    }
 }
