@@ -31,5 +31,10 @@ public class Dependiente {
         }
         return this.nombre;
     }
+    @Override
+    public String toString() {
+        return getNombre() + " " + this.apellido
+                + " " + this.telefono;
+    }
 }
 
