@@ -3,16 +3,17 @@ package Facturacion;
 import java.util.LinkedList;
 
 public class Dependiente {
+
     String nombre, apellido, clave, telefono;
     char tipo;
     boolean activo;
     LinkedList<Factura> facturas;
-    
-    public Dependiente(){
-        
+
+    public Dependiente() {
+
     }
-    
-    public Dependiente(String nombre, String apellido, String telefono, String clave, char tipo, boolean activo){
+
+    public Dependiente(String nombre, String apellido, String telefono, String clave, char tipo, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -21,7 +22,7 @@ public class Dependiente {
         this.activo = activo;
         this.facturas = new LinkedList();
     }
-    
+
     public String getNombre() {
         if (this.nombre.length() > 7) {
             return this.nombre.substring(0, 7);
@@ -31,13 +32,14 @@ public class Dependiente {
         }
         return this.nombre;
     }
+
     @Override
     public String toString() {
         return getNombre() + " " + this.apellido
                 + " " + this.telefono;
     }
-    
-        public int buscarDependiente(LinkedList<Dependiente> dependiente, String codigo) {
+
+    public int buscarDependiente(LinkedList<Dependiente> dependiente, String codigo) {
         for (int i = 0; i < dependiente.size(); i++) {
             if (dependiente.get(i).nombre.equals(codigo)) {
                 return i;
@@ -45,5 +47,19 @@ public class Dependiente {
         }
         return -1;
     }
-}
 
+    public char seleccionTipoDependiente(LinkedList<Dependiente> dependiente, String codigo) {
+        int pos = buscarDependiente(dependiente, codigo);
+        char tipo = ' ';
+        if (pos != -1) {
+            if (dependiente.get(pos).tipo == 'E') {
+                tipo = 'E';
+            } else {
+                if (dependiente.get(pos).tipo == 'A') {
+                    tipo = 'A';
+                }
+            }
+        }
+        return tipo;
+    }
+}
