@@ -21,5 +21,15 @@ public class Dependiente {
         this.activo = activo;
         this.facturas = new LinkedList();
     }
+    
+    public String getNombre() {
+        if (this.nombre.length() > 7) {
+            return this.nombre.substring(0, 7);
+        }
+        if (this.nombre.length() < 6) {
+            return this.nombre + "  ";
+        }
+        return this.nombre;
+    }
 }
 
