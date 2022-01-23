@@ -62,8 +62,8 @@ public class Dependiente {
         }
         return tipo;
     }
-    
-      public boolean buscarClaveDependiente(LinkedList<Dependiente> dependiente, String codigoUsuario, String claveUsuario) {
+
+    public boolean buscarClaveDependiente(LinkedList<Dependiente> dependiente, String codigoUsuario, String claveUsuario) {
         int posicion = buscarDependiente(dependiente, codigoUsuario);
 
         if (posicion != -1) {
@@ -77,5 +77,14 @@ public class Dependiente {
             System.out.println("\nError: El usuario no existe");
             return false;
         }
+    }
+
+    public boolean eliminarDependiente(LinkedList<Dependiente> dependiente, String codigo) {
+        int pos = buscarDependiente(dependiente, codigo);
+        if (pos != -1) {
+            dependiente.remove(pos);
+            return true;
+        }
+        return false;
     }
 }
