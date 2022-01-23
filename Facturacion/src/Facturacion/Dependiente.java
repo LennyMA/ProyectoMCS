@@ -36,5 +36,14 @@ public class Dependiente {
         return getNombre() + " " + this.apellido
                 + " " + this.telefono;
     }
+    
+        public int buscarDependiente(LinkedList<Dependiente> dependiente, String codigo) {
+        for (int i = 0; i < dependiente.size(); i++) {
+            if (dependiente.get(i).nombre.equals(codigo)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
