@@ -52,4 +52,5 @@ public class Articulo {
         return this.getNombreArticulo() + "\t" + this.codigo + "\t" + this.cantidad + "\t" + ("$ " + this.precio) + "\t\t"
                 + ("$ " + (this.precio * this.cantidad));
     }
+    //Método modificar artículo?
 }
