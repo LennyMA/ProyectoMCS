@@ -16,4 +16,10 @@ public class Compra {
         return this.subTotal = this.cantidadProducto * this.articulo.precio;
     }
 
+    @Override
+    public String toString() {
+        return this.articulo.getNombreArticulo() + "\t" + this.cantidadProducto
+                + "\t" + ("$ " + subTotal());
+    }
+
 }
