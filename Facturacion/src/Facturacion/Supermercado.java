@@ -162,6 +162,7 @@ public class Supermercado {
                     break;
                 case 6:
                     System.out.println("\n\t .: REPORTE ESTADÍSTICO :.");
+                    reporteEstadistico();
                     break;
                 case 7:
                     System.out.println("\n\t .: Cerrando Sesión :.");
@@ -284,6 +285,7 @@ public class Supermercado {
                     break;
                 case 7:
                     System.out.println("\n\t .: REPORTE ESTADÍSTICO :.");
+                    reporteEstadistico();
                     break;
                 case 8:
                     System.out.println("\n\t .: Terminando Turno :.");
@@ -528,5 +530,22 @@ public class Supermercado {
             }
         }
         return total;
+    }
+
+    public void reporteEstadistico() {
+        System.out.println("\n\n ->Promedio de Compras por Cliente");
+        mostrarPromedioClientes();
+        System.out.println("\n\n -> Factura con mayor valor registrado");
+        if (!this.facturas.isEmpty()) {
+            this.factura = valorMaximoFacturado();
+            if (this.factura != null) {
+                this.factura.imprimirFacturaDatos();
+            }
+        } else {
+            System.out.println("No existen facturas");
+        }
+
+        System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
+        System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
     }
 }
