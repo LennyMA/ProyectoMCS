@@ -158,6 +158,12 @@ public class Supermercado {
                     System.out.print("\nCantidad: ");
                     cantidadArticulo = this.tecla.nextInt();
                     this.tecla.nextLine();
+                    boolean modificado = this.articulo.modificarArticulo(this.inventario, nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo);
+                    if (modificado == true) {
+                        System.out.println("\nArtículo Modificado...!");
+                    } else {
+                        System.out.println("\nEl artículo no existe...!");
+                    }
 
                     break;
                 case 6:
