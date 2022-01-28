@@ -538,7 +538,6 @@ public class Supermercado {
         }
         return total;
     }
-<<<<<<< HEAD
 
     public void reporteEstadistico() {
         System.out.println("\n\n ->Promedio de Compras por Cliente");
@@ -556,6 +555,5 @@ public class Supermercado {
         System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
         System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
     }
-=======
->>>>>>> FACT-3
+
 }
