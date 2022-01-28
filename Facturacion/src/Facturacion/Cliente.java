@@ -42,7 +42,13 @@ public class Cliente {
         }
     }
     
-    //un metodo de promedio compras?
+    public float promedioCompras() {
+        float sum = 0;
+        for (int i = 0; i < this.facturas.size(); i++) {
+            sum = sum + this.facturas.get(i).totalPago();
+        }
+        return (sum / this.facturas.size());
+    }
 
     public String getNombre() {
         if (this.nombre.length() > 7) {
