@@ -510,7 +510,8 @@ public class Supermercado {
         for (int i = 0; i < this.clientes.size(); i++) {
             if (!this.clientes.get(i).facturas.isEmpty()) {
                 System.out.printf("%5s%8s%10.2f\n", this.clientes.get(i).nombre,
-                        this.clientes.get(i).apellido);
+                        this.clientes.get(i).apellido,
+                        this.clientes.get(i).promedioCompras());
             }
         }
     }
@@ -537,6 +538,7 @@ public class Supermercado {
         }
         return total;
     }
+<<<<<<< HEAD
 
     public void reporteEstadistico() {
         System.out.println("\n\n ->Promedio de Compras por Cliente");
@@ -554,4 +556,6 @@ public class Supermercado {
         System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
         System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
     }
+=======
+>>>>>>> FACT-3
 }
