@@ -448,7 +448,7 @@ public class Supermercado {
         //this.factura = new Factura(cliente, compras, dependiente, codigo, cancelado);
         this.factura = fac;
         this.facturas.add(fac);
-        //cliente.facturas.add(fac); // <-error
+        cliente.facturas.add(fac);
         dependiente.facturas.add(fac);
     }
 
