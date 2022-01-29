@@ -6,7 +6,7 @@ public class Cliente {
 
     String nombre, apellido, direccion, id, telefono;
     LinkedList<Compra> compras;
-    LinkedList<Compra> facturas;
+    LinkedList<Factura> facturas;
 
     public Cliente() {
 
