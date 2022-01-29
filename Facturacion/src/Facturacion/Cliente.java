@@ -41,7 +41,7 @@ public class Cliente {
             return true;
         }
     }
-    
+
     public float promedioCompras() {
         float sum = 0;
         for (int i = 0; i < this.facturas.size(); i++) {
@@ -58,18 +58,18 @@ public class Cliente {
         }
         return this.nombre;
     }
-    
-    public String getDireccion(){
-        if(this.direccion.length() > 13){
+
+    public String getDireccion() {
+        if (this.direccion.length() > 13) {
             return this.direccion.substring(0, 13);
-        }else if(this.direccion.length() < 10){
+        } else if (this.direccion.length() < 10) {
             return this.direccion + "   ";
         }
         return this.direccion;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return getNombre() + " " + this.apellido + " " + this.id + " "
                 + this.getDireccion() + " " + this.telefono;
     }
