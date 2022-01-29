@@ -1,5 +1,7 @@
 package Facturacion;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 public class Factura {
@@ -9,6 +11,10 @@ public class Factura {
     Dependiente dependiente;
     boolean cancelado;
     int codigo;
+    String f, h;
+    DateTimeFormatter fecha = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
+
     final float IVA = 0.12f;
 
     public Factura() {
@@ -22,6 +28,8 @@ public class Factura {
         this.dependiente = dependiente;
         this.codigo = codigo;
         this.cancelado = cancelado;
+        this.f = this.fecha.format(LocalDateTime.now());
+        this.h = this.hora.format(LocalDateTime.now());
     }
 
     public Factura buscarFactura(LinkedList<Factura> facturas, int codigo) {
@@ -71,6 +79,8 @@ public class Factura {
     public void imprimirFacturaDatos() {
         System.out.printf("\n%26s\n", ".: FACTURA :.");
         System.out.println("Factura Nº " + this.codigo);
+        System.out.printf("%-7s%-6s\n", "Fecha: ", this.f);
+        System.out.printf("%-7s%-6s\n", "Hora: ", this.h);
         System.out.println(generarEstadoCancelada());
         System.out.println("\t .: Datos del Cliente :.\n");
         System.out.printf("%-15s%-11s%-13s%-11s\n", "Nombre", "Cédula", "Dirección", "Teléfono");
