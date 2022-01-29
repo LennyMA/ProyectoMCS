@@ -158,10 +158,17 @@ public class Supermercado {
                     System.out.print("\nCantidad: ");
                     cantidadArticulo = this.tecla.nextInt();
                     this.tecla.nextLine();
+                    boolean modificado = this.articulo.modificarArticulo(this.inventario, nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo);
+                    if (modificado == true) {
+                        System.out.println("\nArtículo Modificado...!");
+                    } else {
+                        System.out.println("\nEl artículo no existe...!");
+                    }
 
                     break;
                 case 6:
                     System.out.println("\n\t .: REPORTE ESTADÍSTICO :.");
+                    reporteEstadistico();
                     break;
                 case 7:
                     System.out.println("\n\t .: Cerrando Sesión :.");
@@ -284,6 +291,7 @@ public class Supermercado {
                     break;
                 case 7:
                     System.out.println("\n\t .: REPORTE ESTADÍSTICO :.");
+                    reporteEstadistico();
                     break;
                 case 8:
                     System.out.println("\n\t .: Terminando Turno :.");
@@ -440,7 +448,7 @@ public class Supermercado {
         //this.factura = new Factura(cliente, compras, dependiente, codigo, cancelado);
         this.factura = fac;
         this.facturas.add(fac);
-        //cliente.facturas.add(fac); // <-error
+        cliente.facturas.add(fac);
         dependiente.facturas.add(fac);
     }
 
@@ -502,7 +510,8 @@ public class Supermercado {
         for (int i = 0; i < this.clientes.size(); i++) {
             if (!this.clientes.get(i).facturas.isEmpty()) {
                 System.out.printf("%5s%8s%10.2f\n", this.clientes.get(i).nombre,
-                        this.clientes.get(i).apellido);
+                        this.clientes.get(i).apellido,
+                        this.clientes.get(i).promedioCompras());
             }
         }
     }
@@ -529,4 +538,22 @@ public class Supermercado {
         }
         return total;
     }
+
+    public void reporteEstadistico() {
+        System.out.println("\n\n ->Promedio de Compras por Cliente");
+        mostrarPromedioClientes();
+        System.out.println("\n\n -> Factura con mayor valor registrado");
+        if (!this.facturas.isEmpty()) {
+            this.factura = valorMaximoFacturado();
+            if (this.factura != null) {
+                this.factura.imprimirFacturaDatos();
+            }
+        } else {
+            System.out.println("No existen facturas");
+        }
+
+        System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
+        System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
+    }
+
 }
