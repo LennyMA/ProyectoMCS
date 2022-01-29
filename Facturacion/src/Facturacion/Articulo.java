@@ -23,9 +23,16 @@ public class Articulo {
         this.cantidad = cantidad;
     }
 
-    public void insertarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
+    public boolean insertarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
             String codigoArticulo, float precioArticulo, int cantidadArticulo) {
-        inventario.add(new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo));
+        int pos = buscarArticulo(inventario, codigoArticulo);
+        if (pos == -1) {
+            inventario.add(new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo));
+            return true;
+        } else {
+            inventario.get(pos).cantidad += cantidadArticulo;
+        }
+        return false;
     }
 
     public int buscarArticulo(LinkedList<Articulo> inventario, String codigoArticulo) {
