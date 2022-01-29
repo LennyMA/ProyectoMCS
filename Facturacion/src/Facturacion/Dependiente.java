@@ -87,7 +87,7 @@ public class Dependiente {
         }
         return false;
     }
-    
+
     public Dependiente buscarDependienteActivo(LinkedList<Dependiente> dependiente) {
         for (int i = 0; i < dependiente.size(); i++) {
             if (dependiente.get(i).activo == true) {

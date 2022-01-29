@@ -8,14 +8,11 @@ public class Articulo {
     int cantidad;
     float precio;
 
-    public Articulo() {
-    }
-
-    public Articulo(String codigo, String nombreArticulo, float precio, int cantidad) {
-        this.codigo = codigo;
+    public Articulo(String nombreArticulo, String codigo, float precio, int cantidad) {
         this.nombreArticulo = nombreArticulo;
-        this.cantidad = cantidad;
+        this.codigo = codigo;
         this.precio = precio;
+        this.cantidad = cantidad;
     }
 
     public Articulo(String nombreArticulo, int cantidad) {
@@ -23,26 +20,9 @@ public class Articulo {
         this.cantidad = cantidad;
     }
 
-    public boolean insertarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
-            String codigoArticulo, float precioArticulo, int cantidadArticulo) {
-        int pos = buscarArticulo(inventario, codigoArticulo);
-        if (pos == -1) {
-            inventario.add(new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo));
-            return true;
-        } else {
-            inventario.get(pos).cantidad += cantidadArticulo;
-        }
-        return false;
-    }
+    public Articulo() {
 
-    public int buscarArticulo(LinkedList<Articulo> inventario, String codigoArticulo) {
-        for (int i = 0; i < inventario.size(); i++) {
-            if (inventario.get(i).codigo.equals(codigoArticulo)) {
-                return i;
-            }
-        }
-        return -1;
-    }
+    }//
 
     public String getNombreArticulo() {
         if (nombreArticulo.length() > 9) {
@@ -60,9 +40,33 @@ public class Articulo {
                 + ("$ " + (this.precio * this.cantidad));
     }
 
-    public boolean modificarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
+    public int buscarArticulo(LinkedList<Articulo> inventario, String codigoArticulo) {
+        for (int i = 0; i < inventario.size(); i++) {
+            if (inventario.get(i).codigo.equals(codigoArticulo)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean insertarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
             String codigoArticulo, float precioArticulo, int cantidadArticulo) {
         int pos = buscarArticulo(inventario, codigoArticulo);
+
+        if (pos == -1) {
+            inventario.add(new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo));
+            return true;
+        } else {
+            inventario.get(pos).cantidad += cantidadArticulo;
+        }
+        return false;
+    }
+
+    public boolean modificarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
+            String codigoArticulo, float precioArticulo, int cantidadArticulo) {
+
+        int pos = buscarArticulo(inventario, codigoArticulo);
+
         if (pos != -1) {
             inventario.get(pos).nombreArticulo = nombreArticulo;
             inventario.get(pos).codigo = codigoArticulo;

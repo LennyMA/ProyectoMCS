@@ -1,10 +1,12 @@
 package Facturacion;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 import Controles.Cedula;
+import Controles.Controles;
 
 public class Supermercado {
+
+    private Controles metodo;
 
     private LinkedList<Dependiente> dependientes;
     private LinkedList<Cliente> clientes;
@@ -17,10 +19,10 @@ public class Supermercado {
     private Cliente cliente;
     private Factura factura; //
     private int codigo = 1;
-    private Scanner tecla = new Scanner(System.in);
 
     public Supermercado() {
 
+        this.metodo = new Controles();
         this.dependiente = new Dependiente();
         this.articulo = new Articulo();
         this.cliente = new Cliente();
@@ -54,8 +56,8 @@ public class Supermercado {
         System.out.print("\n\t\t---- Iniciar Sistema ---\n");
 
         do {
-            System.out.print("\nIngresar(S/N): ");
-            iniciar = this.tecla.next().toUpperCase().charAt(0);
+            this.metodo.ingresoCadena("\nIngresar (S/N): ");
+            iniciar = this.metodo.ingresoRespuesta();
             if (iniciar != 'S' && iniciar != 'N') {
                 System.out.println("S = Si, N = No");
             }
@@ -79,10 +81,10 @@ public class Supermercado {
 
         System.out.println("\n---Iniciar Sesión---\n");
         do {
-            System.out.print("\nUsuario: ");
-            usuario = this.tecla.nextLine().toUpperCase();
-            System.out.print("\nContraseña: ");
-            clave = this.tecla.nextLine().toUpperCase();
+            this.metodo.ingresoCadena("Usuario: ");
+            usuario = this.metodo.ingresoString().toUpperCase();
+            this.metodo.ingresoCadena("Contraseña: ");
+            clave = this.metodo.ingresoString().toUpperCase();
         } while (!this.dependiente.buscarClaveDependiente(this.dependientes, usuario, clave));
 
         posicionD = this.dependiente.buscarDependiente(dependientes, usuario);
@@ -120,9 +122,8 @@ public class Supermercado {
                     + "\n6) Reporte Estadístico"
                     + "\n7) Cerrar Sesión"
                     + "\n8) Cerrar Sistema");
-            System.out.print("\nElija la opcion: ");
-            op = this.tecla.nextInt();
-            this.tecla.nextLine();
+            metodo.ingresoCadena("Elija la opción: ");
+            op = metodo.ingresoNumeroEnteroPositivo();
 
             switch (op) {
                 case 1:
@@ -131,8 +132,8 @@ public class Supermercado {
                     break;
                 case 2:
                     System.out.println("\n\t .: Eliminando Empleado :.");
-                    System.out.print("\nNombre del Empleado: ");
-                    nombreUsuario = this.tecla.nextLine().toUpperCase();
+                    this.metodo.ingresoCadena("\nNombre del Empleado: ");
+                    nombreUsuario = this.metodo.ingresoString().toUpperCase();
                     boolean eliminado = this.dependiente.eliminarDependiente(this.dependientes, nombreUsuario);
                     if (eliminado == true) {
                         System.out.println("\nEmpleado eliminado");
@@ -150,22 +151,20 @@ public class Supermercado {
                     break;
                 case 5:
                     System.out.println("\n\t .: Modificar Artículo :.\n");
-                    System.out.print("\nNombre: ");
-                    nombreArticulo = this.tecla.nextLine().toUpperCase();
-                    System.out.print("\nCodigo: ");
-                    codigoArticulo = this.tecla.nextLine().toUpperCase();
-                    System.out.print("\nPrecio: ");
-                    precioArticulo = this.tecla.nextFloat();
-                    System.out.print("\nCantidad: ");
-                    cantidadArticulo = this.tecla.nextInt();
-                    this.tecla.nextLine();
+                    this.metodo.ingresoCadena("Nombre: ");
+                    nombreArticulo = this.metodo.ingresoString().toUpperCase();
+                    this.metodo.ingresoCadena("Código: ");
+                    codigoArticulo = this.metodo.ingresoString().toUpperCase();
+                    this.metodo.ingresoCadena("Precio: ");
+                    precioArticulo = this.metodo.ingresoNumeroDecimalPositivo();
+                    this.metodo.ingresoCadena("Cantidad: ");
+                    cantidadArticulo = this.metodo.ingresoNumeroEnteroPositivo();
                     boolean modificado = this.articulo.modificarArticulo(this.inventario, nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo);
                     if (modificado == true) {
                         System.out.println("\nArtículo Modificado...!");
                     } else {
                         System.out.println("\nEl artículo no existe...!");
                     }
-
                     break;
                 case 6:
                     System.out.println("\n\t .: REPORTE ESTADÍSTICO :.");
@@ -178,8 +177,8 @@ public class Supermercado {
                 case 8:
                     char respuesta;
                     System.out.println("\n\t .: Cerrar Sistema :.");
-                    System.out.println("\nEsta seguro que desea cerrar sistema? (S/N): ");
-                    respuesta = this.tecla.next().toUpperCase().charAt(0);
+                    this.metodo.ingresoCadena("\nEsta seguro que desea cerrar sistema? (S/N): ");
+                    respuesta = this.metodo.ingresoRespuesta();
                     if (respuesta == 'S') {
                         System.out.println("\nCerrando sistema...!");
                     }
@@ -208,9 +207,8 @@ public class Supermercado {
                     + "\n7) Reporte Estadístico"
                     + "\n8) Terminar Turno"
                     + "\n9) Cerrar Sistema");
-            System.out.print("\nElija la opción: ");
-            op = this.tecla.nextInt();
-            this.tecla.nextLine();
+            this.metodo.ingresoCadena("Elija la opción: ");
+            op = this.metodo.ingresoNumeroEnteroPositivo();
 
             switch (op) {
                 case 1:
@@ -223,25 +221,24 @@ public class Supermercado {
                     System.out.println("\n\t .: Vender :.");
                     do {
                         do {
-                            System.out.print("\nCódigo del Producto: ");
-                            codigoArticulo = this.tecla.nextLine();
+                            this.metodo.ingresoCadena("\nCódigo del Producto: ");
+                            codigoArticulo = this.metodo.ingresoString();
                             articuloEncontrado = this.articulo.buscarArticulo(this.inventario, codigoArticulo);
                             if (articuloEncontrado == -1) {
                                 System.out.println("\nNo existe el producto con el código -> " + codigoArticulo);
                             }
                         } while (articuloEncontrado == -1);
 
-                        System.out.print("\nCantidad: ");
-                        cantidadArticulo = this.tecla.nextInt();
-                        this.tecla.nextLine();
+                        this.metodo.ingresoCadena("Cantidad: ");
+                        cantidadArticulo = this.metodo.ingresoNumeroEnteroPositivo();
                         articuloComprado = vender(articuloEncontrado, cantidadArticulo, this.inventario.get(articuloEncontrado));
 
                         if (articuloComprado != null) {
                             compraActual.add(new Compra(cantidadArticulo, articuloComprado));
                         }
                         do {
-                            System.out.print("\nSeguir vendiendo?(S/N): ");
-                            respuesta = this.tecla.next().toUpperCase().charAt(0);
+                            this.metodo.ingresoCadena("\nSeguir vendiendo?(S/N): ");
+                            respuesta = this.metodo.ingresoRespuesta();
                             if (respuesta != 'S' && respuesta != 'N') {
                                 System.out.println("S = Si, N = No");
                             }
@@ -263,16 +260,20 @@ public class Supermercado {
                     break;
                 case 5:
                     System.out.println("\n\t .: Lista de Facturas por Cliente :.");
-                    System.out.println("\nCedula: ");
-                    id = this.tecla.nextLine();
+                    this.metodo.ingresoCadena("Cedula: ");
+                    id = this.metodo.ingresoString();
                     pos = this.cliente.buscarCliente(this.clientes, id);
+                    if (pos != -1) {
+                        mostrarFacturas(this.clientes.get(pos).facturas);
+                    } else {
+                        System.out.println("\nNo existe el cliente");
+                    }
                     break;
                 case 6:
                     int codigoFactura;
                     System.out.println("\n\t .: Cancelación de Factura :.");
-                    System.out.println("\nCódigo: ");
-                    codigoFactura = this.tecla.nextInt();
-                    this.tecla.nextLine();
+                    this.metodo.ingresoCadena("Código: ");
+                    codigoFactura = metodo.ingresoNumeroEnteroPositivo();
 
                     boolean cancelado = cancelarFactura(this.facturas, codigoFactura);
 
@@ -307,8 +308,8 @@ public class Supermercado {
                 case 9:
                     System.out.println("\n\t .: Cerrar Sistema :.");
                     do {
-                        System.out.println("Está seguro que desea cerrar sistema? (S/N): ");
-                        respuesta = this.tecla.next().toUpperCase().charAt(0);
+                        this.metodo.ingresoCadena("Está seguro que desea cerrar sistema? (S/N): ");
+                        respuesta = this.metodo.ingresoRespuesta();
                         if (respuesta != 'S' && respuesta != 'N') {
                             System.out.println("S = Si, N = No");
                         }
@@ -333,24 +334,29 @@ public class Supermercado {
         Articulo articulo = null;
 
         do {
-            System.out.print("\nCódigo: ");
-            codigoArticulo = this.tecla.nextLine().toUpperCase();
-            System.out.print("Nombre: ");
-            nombreArticulo = this.tecla.nextLine().toUpperCase();
+            this.metodo.ingresoCadena("\nCódigo: ");
+            codigoArticulo = this.metodo.ingresoString().toUpperCase();
+            this.metodo.ingresoCadena("Nombre: ");
+            nombreArticulo = this.metodo.ingresoString().toUpperCase();
 
-            System.out.print("Precio: ");
-            precioArticulo = this.tecla.nextInt();
-            this.tecla.nextLine();
-            System.out.print("Cantidad: ");
-            cantidadArticulo = this.tecla.nextInt();
+            this.metodo.ingresoCadena("Precio: ");
+            precioArticulo = this.metodo.ingresoNumeroDecimalPositivo();
+            this.metodo.ingresoCadena("Cantidad: ");
+            cantidadArticulo = this.metodo.ingresoNumeroEnteroPositivo();
             try {
                 articulo = new Articulo(nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo);
             } catch (Exception ex) {
                 System.out.println("\nError: No existe espacio en memoria");
             }
+            boolean insertado = articulo.insertarArticulo(inventario, nombreArticulo, codigoArticulo, precioArticulo, cantidadArticulo);
+            if (insertado == true) {
+                System.out.println("\nArtículo agregado...!");
+            } else {
+                System.out.println("\nCantidad actualizada...!");
+            }
             do {
-                System.out.print("\nAgregar otro artículo?(S/N): ");
-                respuesta = this.tecla.next().toUpperCase().charAt(0);
+                this.metodo.ingresoCadena("\nAgregar otro artículo?(S/N): ");
+                respuesta = this.metodo.ingresoRespuesta();
                 if (respuesta != 'S' && respuesta != 'N') {
                     System.out.println("S = Si, N = No");
                 }
@@ -407,22 +413,24 @@ public class Supermercado {
         System.out.println("\n\t .: Creando Cliente :.");
         String nombreCliente, apellidoCliente, idCliente, direccionCliente, telefonoCliente;
 
-        System.out.print("\nNombre: ");
-        nombreCliente = this.tecla.nextLine().toUpperCase();
-        System.out.print("Apellido: ");
-        apellidoCliente = this.tecla.nextLine().toUpperCase();
+        this.metodo.ingresoCadena("\nNombre: ");
+        nombreCliente = this.metodo.ingresoString().toUpperCase();
+        this.metodo.ingresoCadena("Apellido: ");
+        apellidoCliente = this.metodo.ingresoString().toUpperCase();
+
         do {
-            System.out.print("Cédula: ");
-            idCliente = this.tecla.nextLine();
+            this.metodo.ingresoCadena("Cédula: ");
+            idCliente = this.metodo.ingresoString();
             if (cedula.verificarCedula(idCliente) == false) {
                 System.out.println("\nError: Ingreso de cédula incorrecto");
             }
         } while (!cedula.verificarCedula(idCliente));
-        System.out.print("Dirección: ");
-        direccionCliente = this.tecla.nextLine().toUpperCase();
+
+        this.metodo.ingresoCadena("Dirección: ");
+        direccionCliente = this.metodo.ingresoString().toUpperCase();
         do {
-            System.out.print("Teléfono: ");
-            telefonoCliente = this.tecla.nextLine().toUpperCase();
+            this.metodo.ingresoCadena("Teléfono: ");
+            telefonoCliente = this.metodo.ingresoString().toUpperCase();
             if (telefonoCliente.length() != 10) {
                 System.out.println("\nError: Debe ingresar 10 dígitos");
             }
@@ -481,21 +489,19 @@ public class Supermercado {
         System.out.println("\n1) Factura con datos"
                 + "\n2) Consumidor final");
 
-        System.out.print("\nElija la opción: ");
-        op = this.tecla.nextInt();
-        this.tecla.nextLine();
+        this.metodo.ingresoCadena("\nElija la opción: ");
+        op = this.metodo.ingresoNumeroEntero();
         do {
             switch (op) {
                 case 1:
                     System.out.println("\n\t .: FACTURA CON DATOS :.");
                     do {
-                        System.out.print("\nCédula: ");
-                        id = this.tecla.nextLine();
+                        this.metodo.ingresoCadena("\nCédula: ");
+                        id = this.metodo.ingresoString();
                         if (cedula.verificarCedula(id) == false) {
                             System.out.println("\nError: Ingreso de cédula incorrecto");
                         }
                     } while (!cedula.verificarCedula(id));
-
                     if (this.cliente.buscarCliente(this.clientes, id) == -1) {
                         System.out.println("\nNo existe el cliente");
                         crearCliente();
@@ -515,6 +521,23 @@ public class Supermercado {
                     System.out.println("\nError: Opción no válida");
             }
         } while (op != 1 && op != 2);
+    }
+
+    public void reporteEstadistico() {
+        System.out.println("\n\n ->Promedio de Compras por Cliente");
+        mostrarPromedioClientes();
+        System.out.println("\n\n -> Factura con mayor valor registrado");
+        if (!this.facturas.isEmpty()) {
+            this.factura = valorMaximoFacturado();
+            if (this.factura != null) {
+                this.factura.imprimirFacturaDatos();
+            }
+        } else {
+            System.out.println("No existen facturas");
+        }
+
+        System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
+        System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
     }
 
     private void mostrarPromedioClientes() {
@@ -551,22 +574,4 @@ public class Supermercado {
         }
         return total;
     }
-
-    public void reporteEstadistico() {
-        System.out.println("\n\n ->Promedio de Compras por Cliente");
-        mostrarPromedioClientes();
-        System.out.println("\n\n -> Factura con mayor valor registrado");
-        if (!this.facturas.isEmpty()) {
-            this.factura = valorMaximoFacturado();
-            if (this.factura != null) {
-                this.factura.imprimirFacturaDatos();
-            }
-        } else {
-            System.out.println("No existen facturas");
-        }
-
-        System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
-        System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
-    }
-
 }
