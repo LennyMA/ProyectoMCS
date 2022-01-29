@@ -2,6 +2,7 @@ package Facturacion;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+import Controles.Cedula;
 
 public class Supermercado {
 
@@ -402,6 +403,7 @@ public class Supermercado {
     }
 
     public boolean crearCliente() {
+        Cedula cedula = new Cedula();
         System.out.println("\n\t .: Creando Cliente :.");
         String nombreCliente, apellidoCliente, idCliente, direccionCliente, telefonoCliente;
 
@@ -409,8 +411,13 @@ public class Supermercado {
         nombreCliente = this.tecla.nextLine().toUpperCase();
         System.out.print("Apellido: ");
         apellidoCliente = this.tecla.nextLine().toUpperCase();
-        System.out.print("Cedula: ");
-        idCliente = this.tecla.nextLine();
+        do {
+            System.out.print("Cédula: ");
+            idCliente = this.tecla.nextLine();
+            if (cedula.verificarCedula(idCliente) == false) {
+                System.out.println("\nError: Ingreso de cédula incorrecto");
+            }
+        } while (!cedula.verificarCedula(idCliente));
         System.out.print("Dirección: ");
         direccionCliente = this.tecla.nextLine().toUpperCase();
         do {
@@ -469,6 +476,7 @@ public class Supermercado {
     public void facturacion(LinkedList<Compra> compraActual) {
         String id;
         int op, posicionCliente;
+        Cedula cedula = new Cedula();
         System.out.println("\n\t .: CREANDO FACTURA :.");
         System.out.println("\n1) Factura con datos"
                 + "\n2) Consumidor final");
@@ -480,8 +488,13 @@ public class Supermercado {
             switch (op) {
                 case 1:
                     System.out.println("\n\t .: FACTURA CON DATOS :.");
-                    System.out.print("\nCédula: ");
-                    id = this.tecla.nextLine();
+                    do {
+                        System.out.print("\nCédula: ");
+                        id = this.tecla.nextLine();
+                        if (cedula.verificarCedula(id) == false) {
+                            System.out.println("\nError: Ingreso de cédula incorrecto");
+                        }
+                    } while (!cedula.verificarCedula(id));
 
                     if (this.cliente.buscarCliente(this.clientes, id) == -1) {
                         System.out.println("\nNo existe el cliente");
@@ -538,6 +551,7 @@ public class Supermercado {
         }
         return total;
     }
+<<<<<<< HEAD
 
     public void reporteEstadistico() {
         System.out.println("\n\n ->Promedio de Compras por Cliente");
@@ -556,4 +570,6 @@ public class Supermercado {
         System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
     }
 
+=======
+>>>>>>> 5a4263d8c5ed50ead2575c900b6f83e70a2d21ec
 }
