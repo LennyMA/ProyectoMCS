@@ -52,5 +52,18 @@ public class Articulo {
         return this.getNombreArticulo() + "\t" + this.codigo + "\t" + this.cantidad + "\t" + ("$ " + this.precio) + "\t\t"
                 + ("$ " + (this.precio * this.cantidad));
     }
-    //Método modificar artículo?
+
+    public boolean modificarArticulo(LinkedList<Articulo> inventario, String nombreArticulo,
+            String codigoArticulo, float precioArticulo, int cantidadArticulo) {
+        int pos = buscarArticulo(inventario, codigoArticulo);
+        if (pos != -1) {
+            inventario.get(pos).nombreArticulo = nombreArticulo;
+            inventario.get(pos).codigo = codigoArticulo;
+            inventario.get(pos).precio = precioArticulo;
+            inventario.get(pos).cantidad = cantidadArticulo;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
