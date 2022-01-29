@@ -1,13 +1,13 @@
 package Facturacion;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 import Controles.Cedula;
 import Controles.Controles;
 
 public class Supermercado {
 
     private Controles metodo;
+
     private LinkedList<Dependiente> dependientes;
     private LinkedList<Cliente> clientes;
     private LinkedList<Articulo> inventario;
@@ -19,9 +19,9 @@ public class Supermercado {
     private Cliente cliente;
     private Factura factura; //
     private int codigo = 1;
-    private Scanner tecla = new Scanner(System.in);
 
     public Supermercado() {
+
         this.metodo = new Controles();
         this.dependiente = new Dependiente();
         this.articulo = new Articulo();
@@ -523,6 +523,23 @@ public class Supermercado {
         } while (op != 1 && op != 2);
     }
 
+    public void reporteEstadistico() {
+        System.out.println("\n\n ->Promedio de Compras por Cliente");
+        mostrarPromedioClientes();
+        System.out.println("\n\n -> Factura con mayor valor registrado");
+        if (!this.facturas.isEmpty()) {
+            this.factura = valorMaximoFacturado();
+            if (this.factura != null) {
+                this.factura.imprimirFacturaDatos();
+            }
+        } else {
+            System.out.println("No existen facturas");
+        }
+
+        System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
+        System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
+    }
+
     private void mostrarPromedioClientes() {
         System.out.printf("\n%5s%10s\n\n",
                 "Nombre-Apellido", "Prom($)");
@@ -557,22 +574,4 @@ public class Supermercado {
         }
         return total;
     }
-
-    public void reporteEstadistico() {
-        System.out.println("\n\n ->Promedio de Compras por Cliente");
-        mostrarPromedioClientes();
-        System.out.println("\n\n -> Factura con mayor valor registrado");
-        if (!this.facturas.isEmpty()) {
-            this.factura = valorMaximoFacturado();
-            if (this.factura != null) {
-                this.factura.imprimirFacturaDatos();
-            }
-        } else {
-            System.out.println("No existen facturas");
-        }
-
-        System.out.println("\n\n -> Valor Total Facturado: " + "$" + valorTotalFacturado(this.facturas));
-        System.out.println("\n\n -> Num Clientes Atendidos: " + this.facturas.size());
-    }
-
 }
