@@ -1,0 +1,10 @@
+REQUERIMIENTOS:
+
+• En un supermercado se tiene el registro del código, nombre, cantidad, precio e IVA de los artículos que se venden. 
+• Se lleva un registro de los clientes, en el cual consta el nombre, apellido, cédula, dirección y teléfono de contacto. 
+• Cada dependiente (empleado) tiene un código y una contraseña para acceder al sistema.
+• La ejecución del sistema comienza con la autenticación de un dependiente al iniciar un turno de trabajo. Cada compra que registra contiene una lista de productos y, por producto, la cantidad que incluye la compra. El sistema generará la factura indicando el subtotal, total valor IVA y total de la factura. 
+• Al registrarse una compra se descontarán las cantidades correspondientes en el inventario de productos.
+• El sistema permitirá cancelar una venta facturada, lo que implica restaurar los valores al inventario.
+• Adicionalmente, el sistema permitirá generar reportes estadísticos: cantidad promedio de compras por cliente, valor máximo facturado en una única factura, valor total facturado y cantidad total de clientes atendidos.
+
